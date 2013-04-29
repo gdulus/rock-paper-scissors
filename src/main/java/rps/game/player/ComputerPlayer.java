@@ -48,7 +48,7 @@ class ComputerPlayer implements Player {
 
     @Override
     public Figure getFigure(Integer id) {
-        throw new IllegalStateException("This type of player doesn't support this methods");
+        throw new IllegalStateException("This type of player doesn't support this method");
     }
 
     @Override

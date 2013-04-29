@@ -7,7 +7,7 @@ class HumanPlayer implements Player {
 
     @Override
     public Figure getFigure() {
-        throw new IllegalStateException("This type of player doesn't support this methods");
+        throw new IllegalStateException("This type of player doesn't support this method");
     }
 
     @Override
@@ -18,7 +18,7 @@ class HumanPlayer implements Player {
             return figure;
         }
 
-        throw new IllegalArgumentException("This type of player doesn't support this methods");
+        throw new IllegalArgumentException("Can't determine Figure base on id = " + id);
     }
 
     @Override
