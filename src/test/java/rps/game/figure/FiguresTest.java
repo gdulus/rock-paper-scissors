@@ -35,4 +35,22 @@ public class FiguresTest {
         Assert.assertTrue(Figures.SCISSORS.subordinates().contains(Figures.ROCK));
     }
 
+    @Test
+    public void getRandom_multipleGenerations_shouldNotFail(){
+        for (int index = 0; index < 1000; index++){
+            Assert.assertNotNull(Figures.getRandom());
+        }
+    }
+
+    @Test
+    public void valueOf_notExisting_shouldReturnNull(){
+        Assert.assertNull(Figures.valueOf(null));
+    }
+
+    @Test
+    public void valueOf_existing_shouldReturnProperFigure(){
+        Assert.assertEquals(Figures.PAPER, Figures.valueOf(Figures.PAPER.getId()));
+        Assert.assertEquals(Figures.SCISSORS, Figures.valueOf(Figures.SCISSORS.getId()));
+        Assert.assertEquals(Figures.ROCK, Figures.valueOf(Figures.ROCK.getId()));
+    }
 }

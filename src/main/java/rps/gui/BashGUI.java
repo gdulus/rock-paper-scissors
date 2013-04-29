@@ -4,73 +4,91 @@ import rps.utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 class BashGUI implements GUI {
 
-    private static final String ANSI_RESET = "\u001B[0m";
+    static final String ANSI_RESET = "\u001B[0m";
 
-    private static final String ANSI_GREEN = "\u001B[32m";
+    static final String ANSI_GREEN = "\u001B[32m";
 
-    private static final String ANSI_YELLOW = "\u001B[33m";
+    static final String ANSI_YELLOW = "\u001B[33m";
 
-    private static final String ANSI_RED = "\u001B[31m";
+    static final String ANSI_RED = "\u001B[31m";
 
-    private static final String HEADER_VISUALISATION = "--------------------------";
+    static final String HEADER_VISUALISATION = "--------------------------";
+
+    private final BufferedReader reader;
+
+    private final PrintStream printStream;
+
+    BashGUI(BufferedReader reader, PrintStream printStream) {
+        this.reader = reader;
+        this.printStream = printStream;
+    }
 
     @Override
     public String pull() {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            return br.readLine();
+            return reader.readLine();
         } catch (final IOException exception){
-            return null;
+            return StringUtils.EMPTY_STRING;
         }
     }
 
     @Override
     public void push(final String message) {
-        resetColor();
-        System.out.println(message);
+        if (message != null){
+            resetColor();
+            printStream.println(message);
+        }
     }
 
     @Override
     public void pushInfo(final String message) {
-        setColor(ANSI_GREEN);
-        System.out.println(message);
+        if (message != null){
+            setColor(ANSI_GREEN);
+            printStream.println(message);
+        }
     }
 
     @Override
     public void pushWarning(String message) {
-        setColor(ANSI_YELLOW);
-        System.out.println(message);
+        if (message != null){
+            setColor(ANSI_YELLOW);
+            printStream.println(message);
+        }
     }
 
     @Override
     public void pushError(String message) {
-        setColor(ANSI_RED);
-        emptyLine();
-        System.out.println(message);
-        emptyLine();
+        if (message != null){
+            setColor(ANSI_RED);
+            emptyLine();
+            printStream.println(message);
+            emptyLine();
+        }
     }
 
     @Override
     public void pushHeader(String header) {
-        setColor(ANSI_GREEN);
-        System.out.println(HEADER_VISUALISATION);
-        System.out.println(header);
-        System.out.println(HEADER_VISUALISATION);
+        if (header != null){
+            setColor(ANSI_GREEN);
+            printStream.println(HEADER_VISUALISATION);
+            printStream.println(header);
+            printStream.println(HEADER_VISUALISATION);
+        }
     }
 
     private void emptyLine(){
-        System.out.println(StringUtils.EMPTY_STRING);
+        printStream.println(StringUtils.EMPTY_STRING);
     }
 
     private void setColor(final String color){
-        System.out.print(color);
+        printStream.print(color);
     }
 
     private void resetColor(){
-        System.out.print(ANSI_RESET);
+        printStream.print(ANSI_RESET);
     }
 }

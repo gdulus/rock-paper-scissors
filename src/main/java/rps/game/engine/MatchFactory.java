@@ -9,6 +9,10 @@ final class MatchFactory {
     }
 
     public static Match produce(final MatchType matchType, final GUI gui, final MessageProvider messageProvider){
+        if (matchType == null){
+            throw new IllegalArgumentException("Can't build Match for null type");
+        }
+
         switch (matchType){
             case COMPUTER_VS_COMPUTER:
                 return new MatchComputerVsComputer(gui, messageProvider);

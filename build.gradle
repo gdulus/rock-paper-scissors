@@ -1,19 +1,25 @@
 apply plugin: 'java'
 apply plugin:'application'
 
+mainClassName = "rps.Main"
+sourceCompatibility = JavaVersion.VERSION_1_7
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.powermock:powermock-easymock-release-full:1.5'
+    testCompile 'org.powermock:powermock-api-mockito:1.5'
 }
 
 test {
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
 }
-
-mainClassName = "rps.Main"
-sourceCompatibility = 1.7
 
 run {
     standardInput = System.in

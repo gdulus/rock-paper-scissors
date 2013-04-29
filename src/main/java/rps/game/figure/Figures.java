@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Can't use enumeration due too illegal forward reference
- */
 public final class Figures {
 
     public static final Figure ROCK;

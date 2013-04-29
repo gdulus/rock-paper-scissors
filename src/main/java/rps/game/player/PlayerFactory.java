@@ -11,6 +11,10 @@ public final class PlayerFactory {
     }
 
     public static Player produce(final Type type){
+        if (type == null){
+            throw new IllegalArgumentException("Can't build Player for null type");
+        }
+
         switch (type){
             case COMPUTER:
                 return new ComputerPlayer();

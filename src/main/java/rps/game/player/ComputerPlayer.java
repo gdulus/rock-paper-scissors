@@ -7,6 +7,9 @@ import rps.game.figure.Figures;
 
 import java.util.List;
 
+/**
+ * Just simple randomization here
+ */
 class ComputerPlayer implements Player {
 
     private Figure computerLastMove;

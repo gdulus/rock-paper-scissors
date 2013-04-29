@@ -10,6 +10,10 @@ public final class MessageProviderFactory {
     }
 
     public static MessageProvider produce(final Type type) {
+        if (type == null){
+            throw new IllegalArgumentException("Can't build MessageProvider for null type");
+        }
+
         switch (type){
             case SIMPLE:
                 return new SimpleMessageProvider();

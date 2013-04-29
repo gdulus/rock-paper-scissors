@@ -11,7 +11,7 @@ public final class StringUtils {
     private StringUtils() {
     }
 
-    public static String replaceString(final String input, final Object[] params){
+    public static String replaceString(final String input, final Object...params){
         if (input == null || input.isEmpty()){
             return EMPTY_STRING;
         }

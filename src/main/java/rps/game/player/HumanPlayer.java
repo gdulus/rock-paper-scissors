@@ -11,8 +11,14 @@ class HumanPlayer implements Player {
     }
 
     @Override
-    public Figure getFigure(Integer id) {
-        return Figures.valueOf(id);
+    public Figure getFigure(final Integer id) {
+        final Figure figure = Figures.valueOf(id);
+
+        if (figure != null){
+            return figure;
+        }
+
+        throw new IllegalArgumentException("This type of player doesn't support this methods");
     }
 
     @Override
